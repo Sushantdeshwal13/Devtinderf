@@ -36,10 +36,15 @@ const Login = () => {
     try {
       const res = await axios.post(
       BASE_URL + "/signup",
-      { firstname: firstName, lastname: lastName, email: emailId, password },
+       {
+    firstName: firstName.trim(),
+    lastName: lastName.trim(),
+    email: emailId.trim(),
+    password: password,
+  },
       { withCredentials: true }
       );
-
+         console.log(res)
       dispatch(addUser(res.data.data));
       return navigate("/profile");
     } catch (err) {

@@ -43,18 +43,19 @@ const Requests = () => {
       <h1 className="text-bold text-white text-3xl">Connection Requests</h1>
 
       {requests.map((request) => {
-        const { _id, firstName, lastName, photoUrl, age, gender, about } =
-          request.fromUserId;
+        console.log(request);
+       const { _id, firstName, lastName, photoUrl, age, gender, about } = request.sender || {};
+
 
         return (
           <div
             key={_id}
-            className=" flex justify-between items-center m-4 p-4 rounded-lg bg-base-300  mx-auto"
+            className=" flex justify-between items-center m-4 p-4 w-2/3 rounded-lg bg-base-300  mx-auto"
           >
             <div>
               <img
                 alt="photo"
-                className="w-20 h-20 rounded-full"
+                className="w-30 h-30 rounded-full"
                 src={photoUrl}
               />
             </div>
@@ -67,13 +68,13 @@ const Requests = () => {
             </div>
             <div>
               <button
-                className="btn btn-primary mx-2"
+                className="btn btn-primary mx-2 "
                 onClick={() => reviewRequest("rejected", request._id)}
               >
                 Reject
               </button>
               <button
-                className="btn btn-secondary mx-2"
+                className="btn btn-secondary mx-2 mt-4"
                 onClick={() => reviewRequest("accepted", request._id)}
               >
                 Accept
