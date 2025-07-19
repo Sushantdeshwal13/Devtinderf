@@ -21,18 +21,18 @@ const [error, setError] = useState("");
     //Clear Errors
     setError("");
     try {
-      const res = await axios.patch(
-        BASE_URL + "/profile/edit",
-        {
-          firstName,
-           lastName,
-           photoUrl,
-          age,
-          gender,
-          about,
-        },
-        { withCredentials: true }
-      );
+     const res =await axios.patch(BASE_URL + "/profile/edit", {
+  firstName,
+  lastName,
+  photoUrl,
+  about,
+  age,
+  gender,
+
+  },
+  { withCredentials: true }
+);
+
       dispatch(addUser(res?.data));
       setShowToast(true);
       setTimeout(() => {

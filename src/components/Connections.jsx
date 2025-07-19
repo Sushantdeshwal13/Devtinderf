@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/conectionSlice";
 import { Link } from "react-router-dom";
 
-  const Connections = () => {
+const Connections = () => {
   const connections = useSelector((store) => store.connections);
   const dispatch = useDispatch();
   const fetchConnections = async () => {
@@ -36,14 +36,14 @@ import { Link } from "react-router-dom";
       {connections.map((connection) => {
   const {
     _id,
-    firstname = "Unknown",
-    lastname = "",
+    firstName = "Unknown",
+    lastName = "",
     photoUrl = "https://cdn-icons-png.flaticon.com/512/149/149071.png",
     age = "N/A",
     gender = "Not specified",
     about = "No bio available"
   } = connection;
-     console.log("Connection values =>", { firstname, age, gender, about });
+     console.log("Connection values =>", { firstName, lastName, age, gender, about });
   
         return (
           <div
@@ -59,7 +59,7 @@ import { Link } from "react-router-dom";
        </div>
         <div className="text-left mx-4 ">
          <h2 className="font-bold text-xl">
-          {firstname + " " + lastname}
+          {firstName + " " + lastName}
            </h2>
             {age && gender && <p>{age + ", " + gender}</p>}
            <p>{about}</p>

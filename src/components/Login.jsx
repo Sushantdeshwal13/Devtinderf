@@ -44,8 +44,8 @@ const Login = () => {
   },
       { withCredentials: true }
       );
-         console.log(res)
-      dispatch(addUser(res.data.data));
+         console.log(res.data)
+      dispatch(addUser(res.data));
       return navigate("/profile");
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");

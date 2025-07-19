@@ -13,23 +13,31 @@ const Body = () => {
   const userData = useSelector((store) => store.user);
 
   const fetchUser = async () => {
-    if (userData) return;
-    try {
-      const res = await axios.get(BASE_URL + "/profile", {
-        withCredentials: true,
-      });
-      dispatch(addUser(res.data));
-    } catch (err) {
-      if (err.status === 401) {
-        navigate("/login");
-      }
-      console.error(err);
+  try {
+    const res = await axios.get(BASE_URL + "/profile", {
+      withCredentials: true,
+    });
+    dispatch(addUser(res.data));
+  } catch (err) {
+    console.error("Error fetching user:", err);
+    if (err?.response?.status === 401) {
+      localStorage.removeItem("token");
+      navigate("/login");
     }
-  };
+  }
+};
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
+
+ useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    fetchUser(); // ✅ Only call if token exists
+  } else {
+    navigate("/login");
+  }
+}, []);
+
 
   return (
     <div>
