@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/conectionSlice";
 import { Link } from "react-router-dom";
 
-const Connections = () => {
+  const Connections = () => {
   const connections = useSelector((store) => store.connections);
   const dispatch = useDispatch();
   const fetchConnections = async () => {
@@ -38,35 +38,35 @@ const Connections = () => {
     _id,
     firstname = "Unknown",
     lastname = "",
-    photourl = "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    photoUrl = "https://cdn-icons-png.flaticon.com/512/149/149071.png",
     age = "N/A",
     gender = "Not specified",
     about = "No bio available"
   } = connection;
-
-
+     console.log("Connection values =>", { firstname, age, gender, about });
+  
         return (
           <div
             key={_id}
             className="flex m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto"
           >
-            <div>
-               <img
-      alt="photo"
-      className="w-20 h-20 rounded-full object-cover"
-      src={photourl || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
-    />
+   <div>
+      <img
+         alt="photo"
+         className="w-20 h-20 rounded-full object-cover"
+         src={photoUrl || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+      />
+       </div>
+        <div className="text-left mx-4 ">
+         <h2 className="font-bold text-xl">
+          {firstname + " " + lastname}
+           </h2>
+            {age && gender && <p>{age + ", " + gender}</p>}
+           <p>{about}</p>
             </div>
-            <div className="text-left mx-4 ">
-              <h2 className="font-bold text-xl">
-                {firstname + " " + lastname}
-              </h2>
-              {age && gender && <p>{age + ", " + gender}</p>}
-              <p>{about}</p>
-            </div>
-            <Link to={"/chat/" + _id}>
+             <Link to={"/chat/" + _id}>
               <button className="btn btn-primary">Chat</button>
-            </Link>
+             </Link>
           </div>
         );
       })}
